@@ -1,6 +1,7 @@
 language: node_js
 node_js: node
-deploy:
+deploy: evening-springs-62991
+provider: heroku
   matrix:
   - evening-springs-62991
   api_key:
