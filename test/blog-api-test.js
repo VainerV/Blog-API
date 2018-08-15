@@ -48,7 +48,7 @@ describe("Blog API", function() {
         // because we create three items on app load
        // expect(res.body.length).to.be.at.least(1);
         // each item should be an object with key/value pairs
-        // for `id`, `name` and `checked`.
+        // for "id", "title", "content", "author", "publishDate"
         const expectedKeys = ["id", "title", "content", "author", "publishDate"];
         res.body.forEach(function(item) {
           expect(item).to.be.a("object");
@@ -64,7 +64,7 @@ describe("Blog API", function() {
   //  2. inspect response object and prove it has right
   //  status code and that the returned object has an `id`
   it("should add an item on POST", function() {
-    const newItem = { title: "Call of the Wild", content: "book", author: "Jack London"};
+    const newItem = {title: "Call of the Wild", content: "book", author: "Jack London"};
     return chai
       .request(app)
       .post("/blog-posts")
@@ -78,7 +78,8 @@ describe("Blog API", function() {
         // response should be deep equal to `newItem` from above if we assign
         // `id` to it from `res.body.id`
         expect(res.body).to.deep.equal(
-          Object.assign(newItem, { id: res.body.id })
+          Object.assign(newItem, { id: res.body.id }),
+          Object.assign(newItem, { publishDate: res.body.publishDate })
         );
       });
   });
