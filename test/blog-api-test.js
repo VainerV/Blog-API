@@ -64,7 +64,7 @@ describe("Blog API", function() {
   //  2. inspect response object and prove it has right
   //  status code and that the returned object has an `id`
   it("should add an item on POST", function() {
-    const newItem = {title: "Call of the Wild", content: "book", author: "Jack London"};
+    const newItem = {title: "Call of the Wild", content: "book", author: "Jack London", publishDate: ""};
     return chai
       .request(app)
       .post("/blog-posts")
