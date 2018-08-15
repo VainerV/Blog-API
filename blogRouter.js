@@ -86,7 +86,7 @@ router.put('/:id', jsonParser, (req, res) => {
     author: req.body.author,
     publishDate: req.body.publishDate
   });
- // res.status(204).end(); SAME error from yesterday
+ // res.status(204).end(); SAME error from yesterday status change too 200 plus end to json with parametr updated Item
  res.status(200).json(updatedItem);
 })
 
