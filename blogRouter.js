@@ -3,8 +3,9 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const {BlogPosts} = require('./models');
-
-
+//next 2 lines creating a new post and loginin it ---- working 
+let newpost = BlogPosts.create("intro to Java", "Book", "John Smith");
+console.log(newpost);
 
 // when the root of this router is called with GET, return
 // all current BlogPosts  
@@ -61,7 +62,7 @@ router.delete('/:id', (req, res) => {
 // of that, log error and send back status code 400. otherwise
 // call `BlogPosts .update` with updated item.
 router.put('/:id', jsonParser, (req, res) => {
-  const requiredFields = ['title', 'content', 'author', "id"];
+  const requiredFields = ['title', 'content', 'author'];
   for (let i=0; i<requiredFields.length; i++) {
     const field = requiredFields[i];
     if (!(field in req.body)) {
@@ -77,7 +78,7 @@ router.put('/:id', jsonParser, (req, res) => {
     console.error(message);
     return res.status(400).send(message);
   }
-  console.log(`Updating shopping list item \`${req.params.id}\``);
+  console.log(`Updating blog-posts item \`${req.params.id}\``);
   const updatedItem = BlogPosts.update({
     id: req.params.id,
     title: req.body.title,
@@ -85,7 +86,8 @@ router.put('/:id', jsonParser, (req, res) => {
     author: req.body.author,
     publishDate: req.body.publishDate
   });
-  res.status(204).end();
+ // res.status(204).end(); SAME error from yesterday
+ res.status(200).json(updatedItem);
 })
 
 module.exports = router;
